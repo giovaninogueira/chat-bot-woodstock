@@ -142,6 +142,40 @@ const flow = {
         messages: [],
         childrens: [menu]
     },
+    '1969': {
+        messages: ['*Escolha o cantor que você gostaria de ouvir...*'],
+        buttons: {
+            title: 'Cantor(a)',
+            options: [
+                'Jimi Hendrix',
+                'Jefferson Airplane',
+                'Ten Years After'
+            ],
+            description: 'Cantor(a) do festival'
+        },
+        childrens: []
+    },
+    'jimi hendrix': {
+        messages: [],
+        audio: {
+            file: 'hey_joe.mp3'
+        },
+        childrens: [menu]
+    },
+    'jefferson airplane': {
+        messages: [menu],
+        audio: {
+            file: 'somebody_to_love.mp3'
+        },
+        childrens: [menu]
+    },
+    'ten years after': {
+        messages: [],
+        audio: {
+            file: 'love_to_change_the_world.mp3'
+        },
+        childrens: [menu]
+    }
 };
 
 export { flow, backMenu }

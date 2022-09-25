@@ -16,7 +16,7 @@ export class ChatService {
      */
     private findFlowByIndex(index: any) {
         console.log(index)
-        if (! flow.hasOwnProperty(index)) {
+        if (!flow.hasOwnProperty(index)) {
             return flow.default;
         }
 
@@ -32,7 +32,7 @@ export class ChatService {
      */
     async sendMessageByIndex(index: string, to: string, chatId: string) {
         index = index.toLowerCase();
-        
+
         const flowMessage = this.findFlowByIndex(index)
 
         await this.sendMessage(chatId, to, flowMessage)
@@ -57,7 +57,7 @@ export class ChatService {
 
         if (message?.link) {
             await this.client.sendLinkPreview(
-                chatId, 
+                chatId,
                 message.link.url,
                 message.link.message
             );
@@ -65,19 +65,43 @@ export class ChatService {
 
         if (message?.location) {
             await this.client.sendLocation(
-                to, 
-                message.location.lat, 
-                message.location.long, 
+                to,
+                message.location.lat,
+                message.location.long,
                 message.location.name
+            )
+        }
+
+        if (message?.buttons) {
+            const buttons = message.buttons.options.map((option: string) => {
+                return {
+                    buttonText: {
+                        displayText: option
+                    }
+                }
+            })
+
+            await this.client.sendButtons(
+                to,
+                message.buttons.title,
+                buttons,
+                message.buttons.description
             )
         }
 
         if (message?.image) {
             await this.client.sendFile(
-                to, 
-                path.join(__dirname, '..', 'public', 'imgs', message.image.file), 
-                message.image.name, 
+                to,
+                path.join(__dirname, '..', 'public', 'imgs', message.image.file),
+                message.image.name,
                 message.image.message
+            )
+        }
+
+        if (message?.audio) {
+            await this.client.sendVoice(
+                to,
+                path.join(__dirname, '..', 'public', 'musics', message.audio.file)
             )
         }
     }
