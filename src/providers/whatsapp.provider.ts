@@ -49,7 +49,7 @@ export class WhatsAppProvider {
             }
 
             const to = message.chat.presence.id;
-            const isNotNewContact = await this.isNotNewContact(contact, message)
+            const isNotNewContact = await this.isNotNewContact(message)
 
             if (! isNotNewContact) {
                 DatabaseProvider.saveChat(to)
@@ -71,17 +71,11 @@ export class WhatsAppProvider {
 
     /**
      * Verify if is new contact
-     * @param contact 
      * @param message 
      * @returns 
      */
-    private async isNotNewContact(contact: Sender, message: Message): Promise<boolean> {
-        if (! contact.isMyContact) {
-            return DatabaseProvider.existChat(message.chat.presence.id)
-        }
-
-        return false;
-    }
+    private async isNotNewContact(message: Message): Promise<boolean> {
+        return DatabaseProvider.existChat(message.chat.presence.id);    }
 
     /**
      * Is message text and not group

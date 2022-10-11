@@ -9,6 +9,7 @@ export class DatabaseProvider {
      static async existChat(phone: string) {
         const result = await fs.readFile(path.join(__dirname, '..', 'database', 'database.json'), 'utf8');
         const chats = JSON.parse(result);
+        console.log(chats)
         return chats.filter((phoneFilter: string) => phoneFilter === phone).length
     }
 

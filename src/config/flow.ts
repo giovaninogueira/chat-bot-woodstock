@@ -31,7 +31,7 @@ const flow = {
             site,
             {
                 messages: [
-                    '_Make love do not make war!_* 🌸💗'
+                    '_Make love, not war_ 🌸💗'
                 ]
             }
         ]
@@ -163,7 +163,7 @@ const flow = {
         childrens: [menu]
     },
     'jefferson airplane': {
-        messages: [menu],
+        messages: [],
         audio: {
             file: 'somebody_to_love.mp3'
         },
